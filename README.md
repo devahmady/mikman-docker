@@ -1,2 +1,2 @@
 mikman docker 
-dockumntasi lenngkap silahkan kunjungi balehotspot.com
+untuk scrip isolir bisa kunjungi balehotspot.com
