@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  
+   # webserver nginx for mikman
+    webserver-mikman:
+      image: nginx:stable-alpine
+      container_name: webserver-mikman
+      ports:
+        - "8000:443"
+      volumes:
+        - ./mikman:/var/www/mikman
+        - ./mikman/server/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        - ./mikman/server/certificate:/etc/nginx/certs
+      networks:
+        - mikman_network
+      depends_on:
+        - mikman
+
+    # container mikman
+    mikman:
+      container_name: mikman-container
+      build:
+        context: ./mikman
+      networks:
+        - mikman_network
+
+
+# mikman Networking
+networks:
+  mikman_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.100.0.0/16
